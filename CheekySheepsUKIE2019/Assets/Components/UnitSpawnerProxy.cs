@@ -10,6 +10,8 @@ public class UnitSpawnerProxy : MonoBehaviour, IDeclareReferencedPrefabs, IConve
     public int CountX;
     public int CountY;
 
+
+
     // Referenced prefabs have to be declared so that the conversion system knows about them ahead of time
     public void DeclareReferencedPrefabs(List<GameObject> gameObjects)
     {

@@ -49,23 +49,24 @@ public class UnitSpawnerSystem : JobComponentSystem
            
                     var instance = CommandBuffer.Instantiate(spawner.Prefab);
 
-                     var position = math.transform(location.Value, new float3(x * 2, 0, y * 2)); //determine x y count
+                    //float2 direction = new float2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+                    var position = math.transform(location.Value, new float3(x , 0, y )); //determine x y count
+                   // var position = new float3(UnityEngine.Random.Range(x -1f, y + 1f), UnityEngine.Random.Range(x -1f, y + 1f));
+                    //TODO: Eventually switch to the new Unity.Physics AABB 
+                    var aabb = new AABB
+                    {
+                        //0.5f will represent halfwidth for now
+                        max = position + 1,
+                        min = position - 1,
 
-                    /*  //TODO: Eventually switch to the new Unity.Physics AABB 
-                      var aabb = new AABB
-                      {
-                          //0.5f will represent halfwidth for now
-                          max = position + 1,
-                          min = position - 1,
-
-                      };*/
+                    };
 
 
 
                     CommandBuffer.SetComponent(instance, new Translation { Value = position });
 
                     //Weirdly have to do it in code now
-                    //CommandBuffer.AddComponent(instance, aabb);
+                    CommandBuffer.AddComponent(instance, aabb);
                     CommandBuffer.AddComponent(instance, new PlayerInput());
                     CommandBuffer.AddComponent(instance, new UnitNavAgent());
 

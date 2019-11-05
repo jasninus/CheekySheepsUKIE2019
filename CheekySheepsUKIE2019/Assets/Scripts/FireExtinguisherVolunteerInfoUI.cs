@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class FireExtinguisherVolunteerInfoUI : VolunteerInfoUI
         currentFireVolunteer = ((FireExtinguisherVolunteer)toDisplay);
         currentFireVolunteer.updateExtinguishingUI += UpdateExtinguishing;
         currentFireVolunteer.updateWaterUI += UpdateWaterUI;
+        extinguishButtonText.text = currentFireVolunteer.IsExtinguishing ? "Stop extinguishing" : "Start extinguishing";
     }
 
     public override void Deactivate()

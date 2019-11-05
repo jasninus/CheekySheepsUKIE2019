@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class PlanterVolunteer : VolunteerType
 {
+    private void Update()
+    {
+        Debug.Log("Hello");
+    }
 }

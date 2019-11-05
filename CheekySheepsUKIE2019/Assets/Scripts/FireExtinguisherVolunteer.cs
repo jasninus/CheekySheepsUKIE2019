@@ -6,7 +6,8 @@ using UnityEngine;
 public class FireExtinguisherVolunteer : VolunteerType
 {
     public static float ExtinguishingWaterDrain;
-    [SerializeField] private float extinguishingWaterDrain, maxWater;
+    [SerializeField] private float extinguishingWaterDrain;
+    public float maxWater;
     private float currentWater;
 
     public Action<bool> updateExtinguishingUI;
@@ -28,7 +29,7 @@ public class FireExtinguisherVolunteer : VolunteerType
         }
     }
 
-    private float CurrentWater
+    public float CurrentWater
     {
         get => currentWater;
         set

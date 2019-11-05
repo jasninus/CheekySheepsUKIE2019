@@ -6,6 +6,7 @@ TagManager:
   tags:
   - VolunteerInfoUIManager
   - MainCanvas
+  - RiverTransformCenter
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - Volunteer
-  - 
+  - River
   - 
   - 
   - 

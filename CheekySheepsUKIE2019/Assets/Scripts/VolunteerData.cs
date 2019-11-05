@@ -7,7 +7,7 @@ using UnityEngine;
 
 public static class VolunteerData
 {
-    private static List<FireExtinguisherVolunteer> fireExtinguisherVolunteers = new List<FireExtinguisherVolunteer>();
+    public static List<FireExtinguisherVolunteer> fireExtinguisherVolunteers = new List<FireExtinguisherVolunteer>();
 
     public static float3[] GetActiveFireExtinguisherVolunteers()
     {

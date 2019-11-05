@@ -10,14 +10,19 @@ public class Volunteer : MonoBehaviour
 
     private VolunteerInfoUIActivater infoUIActivater;
 
+    [SerializeField] private VolunteerRole TEST_ROLE;
+
     private VolunteerRole role = VolunteerRole.WaterGatherer;
 
-    private bool isSelected;
+    public bool isSelected;
 
     private void Awake()
     {
+        type = GetComponent<WaterGathererVolunteer>();
         infoUIActivater = GameObject.FindWithTag("VolunteerInfoUIManager").GetComponent<VolunteerInfoUIActivater>();
-        UpgradeTo(VolunteerRole.FireExtinguisher); // TODO remove, for testing purposes only
+
+        //UpgradeTo(VolunteerRole.FireExtinguisher); // TODO remove, for testing purposes only
+        UpgradeTo(TEST_ROLE);
     }
 
     private GraphicRaycaster m_Raycaster;
@@ -38,11 +43,13 @@ public class Volunteer : MonoBehaviour
         {
             if (ThisClickedOnOrUIClickedOn())
             {
+                Debug.Log("Opening info panel");
                 isSelected = true;
                 OpenInfoPanel();
             }
             else if (isSelected && !UIClickedOn())
             {
+                Debug.Log("Closing info panel");
                 isSelected = false;
                 CloseInfoPanel();
             }
@@ -87,15 +94,22 @@ public class Volunteer : MonoBehaviour
         switch (newRole)
         {
             case VolunteerRole.FireExtinguisher:
+                type.enabled = false;
                 type = GetComponent<FireExtinguisherVolunteer>();
+                type.enabled = true;
+                VolunteerData.fireExtinguisherVolunteers.Add((FireExtinguisherVolunteer)type);
                 break;
 
             case VolunteerRole.AnimalSaver:
+                type.enabled = false;
                 type = GetComponent<AnimalSaverVolunteer>();
+                type.enabled = true;
                 break;
 
             case VolunteerRole.Planter:
+                type.enabled = false;
                 type = GetComponent<PlanterVolunteer>();
+                type.enabled = true;
                 break;
         }
     }

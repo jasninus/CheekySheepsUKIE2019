@@ -4,4 +4,8 @@ using UnityEngine;
 
 public class AnimalSaverVolunteer : VolunteerType
 {
+    private void Update()
+    {
+        Debug.Log("Hello");
+    }
 }

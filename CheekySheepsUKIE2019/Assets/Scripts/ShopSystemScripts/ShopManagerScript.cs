@@ -5,10 +5,24 @@ using UnityEngine.UI;
 
 public class ShopManagerScript : MonoBehaviour
 {
-    public static ShopManagerScript shopManagerScript;
+    ShopManagerScript shopManagerScript;
     [SerializeField] private uint resources;
     public Text ResourcesText;
 
+    private uint Resources
+    {
+        get => resources;
+        set
+        {
+            resources = value;
+            UpdateStoreUI();
+        }
+    }
+
+    public uint GetResources()
+    {
+        return resources;
+    }
     public void AddResources(uint amount)
     {
         resources += amount;
@@ -25,7 +39,7 @@ public class ShopManagerScript : MonoBehaviour
 
     void UpdateStoreUI()
     {
-        ResourcesText.text = "£ " + resources.ToString("N2");
+        ResourcesText.text = "Awarnes " + resources.ToString();
     }
 
     // Start is called before the first frame update
@@ -33,11 +47,17 @@ public class ShopManagerScript : MonoBehaviour
     {
         shopManagerScript = this;
         UpdateStoreUI();
+        InvokeRepeating("IncrementAwareness", 1, 1);
+    }
+
+    private void IncrementAwareness()
+    {
+        Resources += (uint)Random.Range(25, 100);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //UpdateStoreUI();
     }
 }

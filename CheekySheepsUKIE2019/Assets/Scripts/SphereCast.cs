@@ -20,6 +20,7 @@ public class SphereCast : MonoBehaviour
     public void SetSpotlightposition()
     {
         spotLight.GetComponent<Transform>().position = origin;
+        spotLight.range = maxDistance;
     }
     private void OnDrawGizmosSelected()
     {

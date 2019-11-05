@@ -54,6 +54,8 @@ public class Volunteer : MonoBehaviour
 
     public void UpgradeTo(VolunteerRole newRole)
     {
+        Debug.Log($"Upgrading to: {newRole}");
+
         switch (newRole)
         {
             case VolunteerRole.FireExtinguisher:

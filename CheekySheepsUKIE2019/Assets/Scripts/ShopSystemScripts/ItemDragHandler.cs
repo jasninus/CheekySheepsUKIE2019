@@ -8,6 +8,8 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
     private Vector2 rectTransform;
     private RectTransform rectTrans;
 
+    [SerializeField] private VolunteerRole role;
+
     private void Awake()
     {
         rectTrans = GetComponent<RectTransform>();
@@ -22,6 +24,10 @@ public class ItemDragHandler : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         //transform.position = rectTransform;
         rectTrans.anchoredPosition = rectTransform;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out var hit);
+        hit.transform.GetComponent<Volunteer>()?.UpgradeTo(role);
     }
     // Start is called before the first frame update
     void Start()

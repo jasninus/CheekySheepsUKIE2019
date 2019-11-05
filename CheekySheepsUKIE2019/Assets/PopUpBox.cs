@@ -12,17 +12,24 @@ public class PopUpBox : MonoBehaviour
         AniPIcThree,
     }
 
-    int AniSwitch = 1;
-    
-    void AniSwitcher ()
+    Image AwarnessFrame;
+
+    void Framer()
+    {
+        AwarnessFrame = GetComponent<Image>();
+    }
+
+    //int AniSwitch = 1;
+
+    /*void AniSwitcher ()
     {
 
-        PopVals variable;
+        /*PopVals variable;
         variable = PopVals.AniPicOne;
         switch (AniSwitch)
         {
             case 1:
-                AniPicOne = GetComponent<Image>();
+                AniPicOne = I;
                 //choose dolpine
                 break;
             case 2:
@@ -38,6 +45,6 @@ public class PopUpBox : MonoBehaviour
                 //choose cat
                 break;
         }
-    }
-          
+    }*/
+
 }

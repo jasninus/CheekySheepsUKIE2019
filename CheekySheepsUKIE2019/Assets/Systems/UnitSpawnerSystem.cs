@@ -1,64 +1,11 @@
-﻿//using Unity.Collections;
-//using Unity.Entities;
-//using Unity.Transforms;
-//using Unity.Mathematics;
-//using UnityEngine;
-
-//// ComponentSystems run on the main thread. Use these when you have to do work that cannot be called from a job.
-//public class UnitSpawnerSystem : ComponentSystem
-//{
-//    EntityQuery m_Spawners;
-
-//    protected override void OnCreate()
-//    {
-//        m_Spawners = GetEntityQuery(typeof(UnitSpawner), typeof(Translation));
-//    }
-
-//    protected override void OnUpdate()
-//    {
-//        // Get all the spawners in the scene.
-//        using (var spawners = m_Spawners.ToEntityArray(Allocator.TempJob))
-//        {
-//            foreach (var spawner in spawners)
-//            {
-//                for (int i = 0; i < 15; i++)
-//                {
-//                    for (int j = 0; j < 15; j++)
-//                    {
-//                        // Create an entity from the prefab set on the spawner component.
-//                        var prefab = EntityManager.GetSharedComponentData<UnitSpawner>(spawner).prefab;
-//                        var entity = EntityManager.Instantiate(prefab);
-
-//                        // Copy the position of the spawner to the new entity.
-//                        Translation position = EntityManager.GetComponentData<Translation>(spawner);
-//                        position.Value.x = position.Value.x + 2 * i;
-//                        position.Value.z = position.Value.z + 2 * j;
-
-//                        EntityManager.SetComponentData(entity, position);
-
-//                        var aabb = new AABB
-//                        {
-//                            //0.5f will represent halfwidth for now
-//                            max = position.Value + 0.5f,
-//                            min = position.Value - 0.5f,
-
-//                        };
-//                        EntityManager.SetComponentData(entity, aabb);
-//                    }
-//                }
-
-//                // Destroy the spawner so this system only runs once.
-//                EntityManager.DestroyEntity(spawner);
-//            }
-//        }
-//    }
-//}
+﻿
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 // JobComponentSystems can run on worker threads.
 // However, creating and removing Entities can only be done on the main thread to prevent race conditions.
@@ -85,34 +32,40 @@ public class UnitSpawnerSystem : JobComponentSystem
     {
         public EntityCommandBuffer CommandBuffer;
 
-        public void Execute(Entity entity, int index, [ReadOnly] ref UnitSpawner spawner,
-            [ReadOnly] ref LocalToWorld location)
+       
+
+        public void Execute(Entity entity, int index, [ReadOnly] ref UnitSpawner spawner, [ReadOnly] ref LocalToWorld location)
+
         {
+            /*int spawnPointX = UnityEngine.Random.Range(-10, 10);
+            int spawnPointY = UnityEngine.Random.Range(-10, 10);
+            Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, 0);
+            CommandBuffer.Instantiate(spawner.Prefab);*/
+
             for (int x = 0; x < spawner.CountX; x++)
             {
                 for (int y = 0; y < spawner.CountY; y++)
                 {
+           
                     var instance = CommandBuffer.Instantiate(spawner.Prefab);
 
-                     var position = math.transform(location.Value,
-                         new float3(x * 2, 0, y * 2));
+                     var position = math.transform(location.Value, new float3(x * 2, 0, y * 2)); //determine x y count
 
-                    //TODO: Eventually switch to the new Unity.Physics AABB 
-                    var aabb = new AABB
-                    {
-                        //0.5f will represent halfwidth for now
-                        max = position + 1,
-                        min = position - 1,
+                    /*  //TODO: Eventually switch to the new Unity.Physics AABB 
+                      var aabb = new AABB
+                      {
+                          //0.5f will represent halfwidth for now
+                          max = position + 1,
+                          min = position - 1,
 
-                    };
+                      };*/
 
-                    
 
 
                     CommandBuffer.SetComponent(instance, new Translation { Value = position });
 
                     //Weirdly have to do it in code now
-                    CommandBuffer.AddComponent(instance, aabb);
+                    //CommandBuffer.AddComponent(instance, aabb);
                     CommandBuffer.AddComponent(instance, new PlayerInput());
                     CommandBuffer.AddComponent(instance, new UnitNavAgent());
 

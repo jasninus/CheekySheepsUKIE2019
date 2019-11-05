@@ -21,8 +21,8 @@ public class FireExtinguisherVolunteerInfoUI : VolunteerInfoUI
 
     public override void Deactivate()
     {
-        ((FireExtinguisherVolunteer)currentToDisplay).updateExtinguishingUI -= UpdateExtinguishing;
-        ((FireExtinguisherVolunteer)currentToDisplay).updateWaterUI -= UpdateWaterUI;
+        currentFireVolunteer.updateExtinguishingUI -= UpdateExtinguishing;
+        currentFireVolunteer.updateWaterUI -= UpdateWaterUI;
         currentFireVolunteer = null;
         base.Deactivate();
     }

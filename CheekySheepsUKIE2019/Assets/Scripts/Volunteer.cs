@@ -14,7 +14,7 @@ public class Volunteer : MonoBehaviour
 
     private VolunteerRole role = VolunteerRole.WaterGatherer;
 
-    public bool isSelected;
+    [HideInInspector] public bool isSelected;
 
     private void Awake()
     {

@@ -86,6 +86,12 @@ public class VolunteerMovement : MonoBehaviour
         return hit.transform.gameObject.layer == LayerMask.NameToLayer("River") ? transform.position : hit.point;
     }
 
+    public void StopMoving()
+    {
+        moving = false;
+        StopAllCoroutines();
+    }
+
     //private void OnMouseDown()
     //{
     //    Debug.Log("I got clicked on!");

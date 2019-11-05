@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcbb72ac7ec8914b935e2c667115e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentlySaving: {fileID: 0}
+  sqrSavingRange: 3
 --- !u!114 &1009460344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +155,7 @@ MonoBehaviour:
   maxWater: 10
   riverRadius: 5
   waterGatheringDistanceTolerance: 0.3
+  waterSupplyingDistanceTolerance: 0
 --- !u!114 &1009460347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +184,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8481c8ac88ce273419e38aa3b68aa591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TEST_ROLE: 0
+  isSelected: 0

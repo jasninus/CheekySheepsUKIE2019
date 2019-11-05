@@ -6,5 +6,7 @@ public class PlanterVolunteerInfoUI : VolunteerInfoUI
 {
     public override void Activate(VolunteerType toDisplay)
     {
+        base.Activate(toDisplay);
+        Debug.Log("Derived info UI");
     }
 }

@@ -6,5 +6,7 @@ public class AnimalSaverVolunteerInfoUI : VolunteerInfoUI
 {
     public override void Activate(VolunteerType toDisplay)
     {
+        base.Activate(toDisplay);
+        Debug.Log("Derived info UI");
     }
 }

@@ -6,14 +6,50 @@ public class Volunteer : MonoBehaviour
 {
     private VolunteerType type;
 
-    public void OpenInfoPanel()
+    private VolunteerInfoUIActivater infoUIActivater;
+
+    private VolunteerRole role;
+
+    private void Awake()
     {
-        type.GetInfoUI().SetActive(true);
+        infoUIActivater = GameObject.FindWithTag("VolunteerInfoUIManager").GetComponent<VolunteerInfoUIActivater>();
     }
 
-    public void CloseInfoPanelCanvas()
+    private void Update()
     {
-        type.GetInfoUI().SetActive(false);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsClickedOn())
+            {
+                OpenInfoPanel();
+            }
+            else
+            {
+                CloseInfoPanel();
+            }
+        }
+    }
+
+    private bool IsClickedOn()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out var hit, LayerMask.NameToLayer("Volunteer"));
+        return hit.transform == transform;
+    }
+
+    public void OpenInfoPanel()
+    {
+        infoUIActivater.ActivateInfo(role, type);
+    }
+
+    public void CloseInfoPanel()
+    {
+        infoUIActivater.DeactivateInfo(role);
+    }
+
+    private void OnMouseDown()
+    {
+        OpenInfoPanel();
     }
 
     public void UpgradeTo(VolunteerRole newRole)

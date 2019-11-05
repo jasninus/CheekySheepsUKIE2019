@@ -6,10 +6,10 @@ public class VolunteerInfoUIActivater : MonoBehaviour
 {
     [SerializeField] private VolunteerInfoUI fireExtinguisherUI, waterGathererUI, planterUI, animalSaverUI;
 
-    private void Awake()
-    {
-        fireExtinguisherUI.Activate(null);
-    }
+    //private void Awake()
+    //{
+    //    fireExtinguisherUI.Activate(null);
+    //}
 
     public void ActivateInfo(VolunteerRole role, VolunteerType toDisplay)
     {

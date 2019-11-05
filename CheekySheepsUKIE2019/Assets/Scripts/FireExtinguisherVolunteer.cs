@@ -5,19 +5,36 @@ using UnityEngine;
 
 public class FireExtinguisherVolunteer : VolunteerType
 {
+    public static float ExtinguishingWaterDrain;
     [SerializeField] private float extinguishingWaterDrain, maxWater;
     private float currentWater;
 
     public Action<bool> updateExtinguishingUI;
     public Action<float> updateWaterUI;
 
+    private void Awake()
+    {
+        ExtinguishingWaterDrain = extinguishingWaterDrain;
+        CurrentWater = maxWater; // TODO remove, only for testing
+    }
+
     public bool IsExtinguishing
     {
         get => isExtinguishing;
-        private set
+        set
         {
-            isExtinguishing = value;
+            isExtinguishing = value && currentWater > extinguishingWaterDrain;
             updateExtinguishingUI?.Invoke(isExtinguishing);
+        }
+    }
+
+    private float CurrentWater
+    {
+        get => currentWater;
+        set
+        {
+            currentWater = value;
+            updateWaterUI?.Invoke(currentWater);
         }
     }
 
@@ -27,9 +44,9 @@ public class FireExtinguisherVolunteer : VolunteerType
     {
         if (IsExtinguishing)
         {
-            currentWater -= extinguishingWaterDrain;
+            CurrentWater -= extinguishingWaterDrain;
 
-            if (currentWater < extinguishingWaterDrain)
+            if (CurrentWater < extinguishingWaterDrain)
             {
                 StopExtinguishing();
             }
@@ -44,5 +61,12 @@ public class FireExtinguisherVolunteer : VolunteerType
     public void StopExtinguishing()
     {
         IsExtinguishing = false;
+    }
+
+    public override void UpdateAllUI()
+    {
+        base.UpdateAllUI();
+        updateWaterUI?.Invoke(currentWater);
+        updateExtinguishingUI?.Invoke(isExtinguishing);
     }
 }

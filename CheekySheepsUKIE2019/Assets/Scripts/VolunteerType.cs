@@ -26,4 +26,10 @@ public class VolunteerType : MonoBehaviour
     }
 
     protected float energy, health;
+
+    public virtual void UpdateAllUI()
+    {
+        updateEnergyUI?.Invoke(energy);
+        updateHealthUI?.Invoke(health);
+    }
 }

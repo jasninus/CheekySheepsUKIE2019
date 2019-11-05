@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 1401316813553559437}
   - component: {fileID: 7921660330208834888}
   - component: {fileID: -724311781626579630}
-  m_Layer: 0
+  - component: {fileID: 1009460347}
+  m_Layer: 8
   m_Name: VolunteerGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b920f37c00a844642b31462ea6410da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoUI: {fileID: 0}
   extinguishingWaterDrain: 0
+  maxWater: 0
 --- !u!114 &7921660330208834888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55923436bf47ec74aac3509469fb6908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoUI: {fileID: 0}
 --- !u!114 &-724311781626579630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +134,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcbb72ac7ec8914b935e2c667115e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infoUI: {fileID: 0}
+--- !u!114 &1009460347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761751074983028995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86f4bfc315dd9d149bf74812db2e148c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0.05
+  yPosition: 0.5
+  sqrMovementTolerance: 0.3

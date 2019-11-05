@@ -15,7 +15,7 @@ public class VolunteerMovement : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"AwaitingMoveTarget: {awaitingMoveTarget}");
+        //Debug.Log($"AwaitingMoveTarget: {awaitingMoveTarget}");
 
         if (awaitingMoveTarget && Input.GetMouseButtonDown(RIGHT_MOUSE_BUTTON))
         {

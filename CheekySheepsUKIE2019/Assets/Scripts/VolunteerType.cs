@@ -1,10 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class VolunteerType : MonoBehaviour
 {
-    [SerializeField] private GameObject infoUI;
+    public Action<float> updateEnergyUI, updateHealthUI;
 
-    public GameObject GetInfoUI() => infoUI;
+    public float Energy
+    {
+        get => energy;
+        private set
+        {
+            energy = value;
+            updateEnergyUI?.Invoke(energy);
+        }
+    }
+
+    public float Health
+    {
+        get => health;
+        private set
+        {
+            health = value;
+            updateHealthUI?.Invoke(health);
+        }
+    }
+
+    protected float energy, health;
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,20 @@ public class FireExtinguisherVolunteer : VolunteerType
     [SerializeField] private float extinguishingWaterDrain, maxWater;
     private float currentWater;
 
-    public bool IsExtinguishing { get; private set; }
+    public Action<bool> updateExtinguishingUI;
+    public Action<float> updateWaterUI;
+
+    public bool IsExtinguishing
+    {
+        get => isExtinguishing;
+        private set
+        {
+            isExtinguishing = value;
+            updateExtinguishingUI?.Invoke(isExtinguishing);
+        }
+    }
+
+    private bool isExtinguishing;
 
     private void FixedUpdate()
     {

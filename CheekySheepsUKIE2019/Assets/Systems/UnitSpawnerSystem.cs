@@ -35,7 +35,7 @@ public class UnitSpawnerSystem : JobComponentSystem
 
         public void Execute(Entity entity, int index, [ReadOnly] ref UnitSpawner spawner, [ReadOnly] ref LocalToWorld location)
         {
-            float spawnDistance = 3;
+            float spawnDistance = 2;
             float randomMaxRadius = 1f;
             Unity.Mathematics.Random rand = new Random((uint)DateTime.Now.Second);
 
@@ -43,7 +43,27 @@ public class UnitSpawnerSystem : JobComponentSystem
             {
                 for (int y = 0; y < spawner.CountY; y++)
                 {
-                    var instance = CommandBuffer.Instantiate(spawner.Prefab);
+                    uint chosenTree = rand.NextUInt(3);
+
+                    Entity instance;
+                    switch (chosenTree)
+                    {
+                        case 0:
+                            instance = CommandBuffer.Instantiate(spawner.Prefab1);
+                            break;
+
+                        case 1:
+                            instance = CommandBuffer.Instantiate(spawner.Prefab2);
+                            break;
+
+                        case 2:
+                            instance = CommandBuffer.Instantiate(spawner.Prefab3);
+                            break;
+
+                        default:
+                            instance = CommandBuffer.Instantiate(spawner.Prefab1);
+                            break;
+                    }
 
                     var position = math.transform(location.Value, new float3(x, 0, y) * spawnDistance + new float3(rand.NextFloat(), 0, rand.NextFloat()) * randomMaxRadius);
 

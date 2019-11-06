@@ -6,5 +6,5 @@ public struct UnitSpawner : IComponentData
 {
     public int CountX;
     public int CountY;
-    public Entity Prefab;
+    public Entity Prefab1, Prefab2, Prefab3;
 }

@@ -15,9 +15,9 @@ public class BlockAttributes : MonoBehaviour
     void Start()
     {
         // convert transform to grid index
-        grid_ind = new Vector3Int(Mathf.RoundToInt(transform.position.x),
-            Mathf.RoundToInt(transform.position.z),
-            Mathf.RoundToInt(transform.position.y));
+       // grid_ind = new Vector3Int(Mathf.RoundToInt(transform.position.x),
+            /*Mathf.RoundToInt(transform.position.z)
+            Mathf.RoundToInt(transform.position.y));*/
     }
 
     // Update is called once per frame

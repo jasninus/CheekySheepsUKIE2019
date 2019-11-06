@@ -22,6 +22,7 @@ public class FxEngine : MonoBehaviour
         {
             // remove any fire fx on block
             // add level 1 fire fx to block
+         
             if (block.transform.Find("Fire") == null)
             {
                 GameObject new_fire = Instantiate(fireFX, block.transform.position, Quaternion.identity);

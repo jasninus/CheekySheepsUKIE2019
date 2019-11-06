@@ -8,6 +8,7 @@ TagManager:
   - MainCanvas
   - RiverTransformCenter
   - Animal
+  - Fire
   layers:
   - Default
   - TransparentFX

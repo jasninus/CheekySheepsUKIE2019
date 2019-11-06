@@ -1,4 +1,4 @@
-﻿Shader "Custom/Toon" {
+﻿Shader "Custom/Water" {
 	//show values to edit in inspector
 	Properties{
 		_Color1("Color1", Color) = (0, 0, 0, 1)
@@ -31,7 +31,7 @@
 
 		//vertex shader
 		void vert(inout appdata_full v){
-			v.vertex.y = 1.5*sin(v.vertex.xy - _SinTime*5);
+			v.vertex.y = 0.5*sin(v.vertex.xz - _SinTime*5);
 		}
 
 		//the surface shader function which sets parameters the lighting function then uses
@@ -45,7 +45,7 @@
 			if (f >  0.8){
 				col = _Color1;
 			}
-			else if (f <= 0.8 && f >=0.5 ) {
+			else if (f <= 0.8 && f >=0.7 ) {
 				col = lerp(_Color1, _Color2, 0.5);
 			}
 			else {

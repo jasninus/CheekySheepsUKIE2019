@@ -24,13 +24,13 @@ public class PopUpBox : MonoBehaviour
     void Update ()
     {
         //for testing only as I don't know the requirements
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
             PicPicker(3);
            
             PopUpActivation();
             //FadeOut();
-        }
+        //}
     }
 
     void PopUpActivation()

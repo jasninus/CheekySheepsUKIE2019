@@ -16,7 +16,7 @@ Shader "Custom/Toon" {
 			//the shader is a surface shader, meaning that it will be extended by unity in the background to have fancy lighting and other features
 			//our surface shader function is called surf and we use our custom lighting model
 			//fullforwardshadows makes sure unity adds the shadow passes the shader might need
-			#pragma surface surf Custom fullforwardshadows
+			#pragma surface surf Custom fullforwardshadows 
 			sampler2D _MainTex;
 			fixed4 _Color;
 			half3 _Emission;

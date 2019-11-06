@@ -17,7 +17,7 @@
 		//the shader is a surface shader, meaning that it will be extended by unity in the background to have fancy lighting and other features
 		//our surface shader function is called surf and we use our custom lighting model
 		//fullforwardshadows makes sure unity adds the shadow passes the shader might need
-		#pragma surface surf Standard fullforwardshadows
+		#pragma surface surf Standard fullforwardshadows vertex:vert
 		#pragma target 4.0
 
 		sampler2D _MainTex,_SubTex;
@@ -28,6 +28,11 @@
 			float2 uv_MainTex;
 			float2 uv_SubTex;
 		};
+
+		//vertex shader
+		void vert(inout appdata_full v){
+			v.vertex.y = 1.5*sin(v.vertex.xy - _SinTime*5);
+		}
 
 		//the surface shader function which sets parameters the lighting function then uses
 

@@ -10,7 +10,7 @@ public class Volunteer : MonoBehaviour
 
     private VolunteerInfoUIActivater infoUIActivater;
 
-    [SerializeField] private VolunteerRole TEST_ROLE;
+    [SerializeField] private VolunteerRole startingRole;
 
     private VolunteerRole role = VolunteerRole.WaterGatherer;
 
@@ -21,13 +21,14 @@ public class Volunteer : MonoBehaviour
         type = GetComponent<WaterGathererVolunteer>();
         infoUIActivater = GameObject.FindWithTag("VolunteerInfoUIManager").GetComponent<VolunteerInfoUIActivater>();
 
-        //UpgradeTo(VolunteerRole.FireExtinguisher); // TODO remove, for testing purposes only
-        UpgradeTo(TEST_ROLE);
+        UpgradeTo(startingRole);
     }
 
     private GraphicRaycaster m_Raycaster;
     private PointerEventData m_PointerEventData;
     private EventSystem m_EventSystem;
+
+    private static Volunteer selectedVolunteer;
 
     private void Start()
     {
@@ -41,22 +42,27 @@ public class Volunteer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (ThisClickedOnOrUIClickedOn())
+            if (ClickedOnThis())
             {
                 Debug.Log("Opening info panel");
-                isSelected = true;
+                selectedVolunteer = this;
                 OpenInfoPanel();
+                isSelected = selectedVolunteer == this;
+                return;
             }
-            else if (isSelected && !UIClickedOn())
+
+            isSelected = selectedVolunteer == this;
+
+            if (isSelected && !UIClickedOn())
             {
                 Debug.Log("Closing info panel");
-                isSelected = false;
                 CloseInfoPanel();
             }
         }
+        isSelected = selectedVolunteer == this;
     }
 
-    private bool ThisClickedOnOrUIClickedOn()
+    private bool ClickedOnThis()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out var hit);

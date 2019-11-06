@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    ShopManagerScript managerScript;
+    private ShopManagerScript managerScript;
     public float currentTime = 0f;
     public float startingTime = 20.0f;
     [SerializeField] public uint AmountOfResources;
@@ -15,13 +15,14 @@ public class Timer : MonoBehaviour
     {
         managerScript = GetComponent<ShopManagerScript>();
     }
+
     private void UpdateTimer()
     {
         if (managerScript.GetResources() >= AmountOfResources)
         {
             currentTime -= Time.deltaTime;
         }
-        if(managerScript.GetResources() - 100 > AmountOfResources)
+        if (managerScript.GetResources() - 100 > AmountOfResources)
         {
             startingTime -= Time.deltaTime;
         }
@@ -31,19 +32,21 @@ public class Timer : MonoBehaviour
     {
         AmountOfResources += 100;
     }
+
     public void UpdateText()
     {
-        text.text = "CUNTdown: " + currentTime.ToString("0");
+        text.text = "Countdown: " + currentTime.ToString("0");
     }
+
     // Start is called before the first frame updates
-    void Start()
+    private void Start()
     {
         currentTime = startingTime;
         InvokeRepeating("IncrementResources", 1, 2);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         currentTime -= 1 * Time.deltaTime;
         UpdateText();

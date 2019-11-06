@@ -12,7 +12,7 @@ public class WaterGathererVolunteerInfoUI : VolunteerInfoUI
     public override void Activate(VolunteerType toDisplay)
     {
         base.Activate(toDisplay);
-        currentWaterGathererVolunteer = ((WaterGathererVolunteer)toDisplay);
+        currentWaterGathererVolunteer = (WaterGathererVolunteer)toDisplay;
         currentWaterGathererVolunteer.updateWaterUI += UpdateWaterUI;
     }
 
@@ -20,7 +20,10 @@ public class WaterGathererVolunteerInfoUI : VolunteerInfoUI
 
     public override void Deactivate()
     {
-        currentWaterGathererVolunteer.updateWaterUI -= UpdateWaterUI;
+        if (currentWaterGathererVolunteer)
+        {
+            currentWaterGathererVolunteer.updateWaterUI -= UpdateWaterUI;
+        }
         currentWaterGathererVolunteer = null;
         base.Deactivate();
     }

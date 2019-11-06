@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -6,6 +6,7 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 // JobComponentSystems can run on worker threads.
 // However, creating and removing Entities can only be done on the main thread to prevent race conditions.
@@ -20,7 +21,7 @@ public class UnitSpawnerSystem : JobComponentSystem
     // to run on the newly-spawned entities before they're rendered for the first time, the HelloSpawnerSystem
     // will use the BeginSimulationEntityCommandBufferSystem to play back its commands. This introduces a one-frame lag
     // between recording the commands and instantiating the entities, but in practice this is usually not noticeable.
-    BeginInitializationEntityCommandBufferSystem m_EntityCommandBufferSystem;
+    private BeginInitializationEntityCommandBufferSystem m_EntityCommandBufferSystem;
 
     protected override void OnCreate()
     {
@@ -28,49 +29,26 @@ public class UnitSpawnerSystem : JobComponentSystem
         m_EntityCommandBufferSystem = World.GetOrCreateSystem<BeginInitializationEntityCommandBufferSystem>();
     }
 
-    struct SpawnJob : IJobForEachWithEntity<UnitSpawner, LocalToWorld>
+    private struct SpawnJob : IJobForEachWithEntity<UnitSpawner, LocalToWorld>
     {
         public EntityCommandBuffer CommandBuffer;
 
-       
-
         public void Execute(Entity entity, int index, [ReadOnly] ref UnitSpawner spawner, [ReadOnly] ref LocalToWorld location)
-
         {
-            /*int spawnPointX = UnityEngine.Random.Range(-10, 10);
-            int spawnPointY = UnityEngine.Random.Range(-10, 10);
-            Vector3 spawnPosition = new Vector3(spawnPointX, spawnPointY, 0);
-            CommandBuffer.Instantiate(spawner.Prefab);*/
+            float spawnDistance = 3;
+            float randomMaxRadius = 1f;
+            Unity.Mathematics.Random rand = new Random((uint)DateTime.Now.Second);
 
             for (int x = 0; x < spawner.CountX; x++)
             {
                 for (int y = 0; y < spawner.CountY; y++)
                 {
-           
                     var instance = CommandBuffer.Instantiate(spawner.Prefab);
 
-                    //float2 direction = new float2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
-                    var position = math.transform(location.Value, new float3(x , 0, y )); //determine x y count
-                   // var position = new float3(UnityEngine.Random.Range(x -1f, y + 1f), UnityEngine.Random.Range(x -1f, y + 1f));
-                    //TODO: Eventually switch to the new Unity.Physics AABB 
-                    var aabb = new AABB
-                    {
-                        //0.5f will represent halfwidth for now
-                        max = position + 1,
-                        min = position - 1,
-
-                    };
-
-
+                    var position = math.transform(location.Value, new float3(x, 0, y) * spawnDistance + new float3(rand.NextFloat(), 0, rand.NextFloat()) * randomMaxRadius);
 
                     CommandBuffer.SetComponent(instance, new Translation { Value = position });
-
-                    //Weirdly have to do it in code now
-                    CommandBuffer.AddComponent(instance, aabb);
-                    CommandBuffer.AddComponent(instance, new PlayerInput());
-                    CommandBuffer.AddComponent(instance, new UnitNavAgent());
-
-
+                    CommandBuffer.AddComponent(instance, new Temperature { temperature = x == 2 && y == 2 ? 1 : 0 });
                 }
             }
 
@@ -89,7 +67,6 @@ public class UnitSpawnerSystem : JobComponentSystem
             CommandBuffer = m_EntityCommandBufferSystem.CreateCommandBuffer()
         }.ScheduleSingle(this, inputDeps);
 
-
         // SpawnJob runs in parallel with no sync point until the barrier system executes.
         // When the barrier system executes we want to complete the SpawnJob and then play back the commands (Creating the entities and placing them).
         // We need to tell the barrier system which job it needs to complete before it can play back the commands.
@@ -98,4 +75,3 @@ public class UnitSpawnerSystem : JobComponentSystem
         return job;
     }
 }
-

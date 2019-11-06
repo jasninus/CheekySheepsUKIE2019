@@ -2,15 +2,12 @@
 using Unity.Entities;
 using UnityEngine;
 
-
 [RequiresEntityConversion]
 public class UnitSpawnerProxy : MonoBehaviour, IDeclareReferencedPrefabs, IConvertGameObjectToEntity
 {
-    public GameObject Prefab;
-    public int CountX;
-    public int CountY;
+    [SerializeField] private GameObject Prefab;
 
-
+    [SerializeField] private int CountX, CountY;
 
     // Referenced prefabs have to be declared so that the conversion system knows about them ahead of time
     public void DeclareReferencedPrefabs(List<GameObject> gameObjects)

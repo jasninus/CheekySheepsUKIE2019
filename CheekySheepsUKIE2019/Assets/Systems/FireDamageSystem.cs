@@ -17,11 +17,15 @@ public class FireDamageSystem : JobComponentSystem
             {
                 health.health = math.max(health.health - healthLossPerTick, 0);
 
+                
+
                 //onFire();
 
                 if (health.health <= 0)
                 {
                     death.isDead = true;
+
+                   
                 }
             }
         }
@@ -33,6 +37,8 @@ public class FireDamageSystem : JobComponentSystem
         {
             maxTempBeforeDamage = 80f,
             healthLossPerTick = 0.1f
+
+
         };
 
         return job.Schedule(this, inputDeps);

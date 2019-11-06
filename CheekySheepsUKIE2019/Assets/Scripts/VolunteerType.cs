@@ -3,33 +3,50 @@ using UnityEngine;
 
 public class VolunteerType : MonoBehaviour
 {
-    public Action<float> updateEnergyUI, updateHealthUI;
+    public Action<float> updateEnergyUI/*, updateHealthUI*/;
 
     public float Energy
     {
         get => energy;
-        private set
+        set
         {
             energy = value;
             updateEnergyUI?.Invoke(energy);
+
+            if (energy <= 0)
+            {
+                Disband();
+            }
         }
     }
 
-    public float Health
+    //public float Health
+    //{
+    //    get => health;
+    //    private set
+    //    {
+    //        health = value;
+    //        updateHealthUI?.Invoke(health);
+    //    }
+    //}
+
+    [SerializeField] private float startingEnergy;
+    protected float energy/*, health*/;
+
+    protected virtual void Awake()
     {
-        get => health;
-        private set
-        {
-            health = value;
-            updateHealthUI?.Invoke(health);
-        }
+        Energy = startingEnergy;
     }
-
-    protected float energy, health;
 
     public virtual void UpdateAllUI()
     {
         updateEnergyUI?.Invoke(energy);
-        updateHealthUI?.Invoke(health);
+        //updateHealthUI?.Invoke(health);
+    }
+
+    public virtual void Disband()
+    {
+        Debug.Log($"{gameObject.name} is disbanding, goodbye cruel world");
+        Destroy(gameObject);
     }
 }

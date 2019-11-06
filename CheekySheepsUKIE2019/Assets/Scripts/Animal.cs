@@ -65,6 +65,7 @@ public class Animal : MonoBehaviour
     {
         isBeingSaved = true;
         yield return new WaitForSeconds(delay);
+        savingVolunteer.Energy -= VolunteerData.ANIMAL_SAVER_ENERGY_LOSS_ON_SAVE;
         Save();
     }
 
@@ -72,6 +73,8 @@ public class Animal : MonoBehaviour
     {
         Debug.Log("Yay! I got saved");
         Destroy(gameObject);
+        //savingVolunteer.IsSaving = false;
+        //savingVolunteer.IsSaving = true;
     }
 
     private void Update()

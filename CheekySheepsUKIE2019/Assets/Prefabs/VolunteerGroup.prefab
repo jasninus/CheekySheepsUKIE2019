@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b920f37c00a844642b31462ea6410da1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingEnergy: 100
   extinguishingWaterDrain: 0.05
+  extinguishingEnergyDrain: 0.1
   maxWater: 10
 --- !u!114 &7921660330208834888
 MonoBehaviour:
@@ -124,6 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55923436bf47ec74aac3509469fb6908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingEnergy: 100
+  replantCooldown: 5
 --- !u!114 &-724311781626579630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfcbb72ac7ec8914b935e2c667115e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingEnergy: 100
   currentlySaving: {fileID: 0}
   sqrSavingRange: 3
 --- !u!114 &1009460344
@@ -150,12 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 161025ffc9adb91498cad45be399a506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingEnergy: 100
   waterGatheringSpeed: 0.1
   waterGivingSpeed: 0.3
   maxWater: 10
   riverRadius: 5
   waterGatheringDistanceTolerance: 0.3
-  waterSupplyingDistanceTolerance: 0
+  waterSupplyingDistanceTolerance: 0.5
+  waterGatheringEnergyDrain: 0.1
 --- !u!114 &1009460347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,5 +191,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8481c8ac88ce273419e38aa3b68aa591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TEST_ROLE: 0
+  TEST_ROLE: 3
   isSelected: 0

@@ -9,11 +9,11 @@ public class FireDamageSystem : JobComponentSystem
 {
     private struct FireDamageJob : IJobForEach<Temperature, Health, Death>
     {
-        public float maxTempBeforeDamage, healthLossPerTick;
+        public float healthLossPerTick;
 
         public void Execute(ref Temperature temperature, ref Health health, ref Death death)
         {
-            if (temperature.temperature > maxTempBeforeDamage)
+            if (temperature.temperature > VolunteerData.MAX_TREE_TEMP_BEFORE_DAMAGE)
             {
                 health.health = math.max(health.health - healthLossPerTick, 0);
 
@@ -29,7 +29,6 @@ public class FireDamageSystem : JobComponentSystem
     {
         var job = new FireDamageJob
         {
-            maxTempBeforeDamage = 80f,
             healthLossPerTick = 0.1f
         };
 

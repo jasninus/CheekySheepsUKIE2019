@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaterGathererVolunteer : VolunteerType
 {
-    [SerializeField] private float waterGatheringSpeed, waterGivingSpeed, maxWater, riverRadius, waterGatheringDistanceTolerance, waterSupplyingDistanceTolerance;
+    [SerializeField] private float waterGatheringSpeed, waterGivingSpeed, maxWater, riverRadius, waterGatheringDistanceTolerance, waterSupplyingDistanceTolerance, waterGatheringEnergyDrain;
     private float currentWater;
 
     private Transform riverTransformCenter, currentFireExtinguisherTarget;
@@ -30,8 +30,9 @@ public class WaterGathererVolunteer : VolunteerType
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         riverTransformCenter = GameObject.FindWithTag("RiverTransformCenter").transform;
         movement = GetComponent<VolunteerMovement>();
     }
@@ -70,10 +71,20 @@ public class WaterGathererVolunteer : VolunteerType
 
     private void FixedUpdate()
     {
+        if (!currentFireExtinguisherTarget)
+        {
+            movingToFireExtinguishers = false;
+        }
+
         if (movingToRiver && Vector2.SqrMagnitude(new Vector2(riverTargetPosition.x - transform.position.x, riverTargetPosition.z - transform.position.z)) < waterGatheringDistanceTolerance)
         {
             Debug.Log("Incrementing water");
             CurrentWater = Mathf.Min(currentWater + waterGatheringSpeed, maxWater);
+
+            if (Math.Abs(CurrentWater - maxWater) > 0.01f)
+            {
+                Energy -= waterGatheringEnergyDrain;
+            }
         }
         else if (movingToFireExtinguishers && Vector2.SqrMagnitude(new Vector2(currentFireExtinguisherTarget.position.x - transform.position.x, currentFireExtinguisherTarget.position.z - transform.position.z)) < waterGatheringDistanceTolerance)
         {

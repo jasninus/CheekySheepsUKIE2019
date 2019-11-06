@@ -12,7 +12,9 @@ public class PlanterVolunteerInfoUI : VolunteerInfoUI
     public override void Activate(VolunteerType toDisplay)
     {
         base.Activate(toDisplay);
-        //currentPlanterVolunteer =
+        currentPlanterVolunteer = (PlanterVolunteer)toDisplay;
+        currentPlanterVolunteer.updateReplantingUI += UpdateReplantingUI;
+        currentPlanterVolunteer.updateSeedUI += UpdateSeedUI;
         Debug.Log("Derived info UI");
     }
 
@@ -21,9 +23,22 @@ public class PlanterVolunteerInfoUI : VolunteerInfoUI
         seedText.text = value.ToString();
     }
 
-    private void UpdateReplantingButtonUI(bool value)
+    private void UpdateReplantingUI(bool value)
     {
         replantingText.text = value ? "Yes" : "No";
         replantingButtonText.text = value ? "Stop replanting" : "Start replanting";
+    }
+
+    public override void Deactivate()
+    {
+        currentPlanterVolunteer.updateReplantingUI -= UpdateReplantingUI;
+        currentPlanterVolunteer.updateSeedUI -= UpdateSeedUI;
+        currentPlanterVolunteer = null;
+        base.Deactivate();
+    }
+
+    public void ToggleReplanting()
+    {
+        currentPlanterVolunteer.IsReplanting = !currentPlanterVolunteer.IsReplanting;
     }
 }

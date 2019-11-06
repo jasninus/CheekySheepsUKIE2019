@@ -37,8 +37,9 @@ public class AnimalSaverVolunteer : VolunteerType
         }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         movement = GetComponent<VolunteerMovement>();
     }
 

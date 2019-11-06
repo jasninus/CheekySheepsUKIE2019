@@ -12,7 +12,7 @@ public class VolunteerInfoUI : MonoBehaviour
     public virtual void Activate(VolunteerType toDisplay)
     {
         toDisplay.updateEnergyUI += UpdateEnergyUI;
-        toDisplay.updateHealthUI += UpdateHealthUI;
+        //toDisplay.updateHealthUI += UpdateHealthUI;
         currentToDisplay = toDisplay;
         gameObject.SetActive(true);
     }
@@ -20,12 +20,12 @@ public class VolunteerInfoUI : MonoBehaviour
     public virtual void Deactivate()
     {
         currentToDisplay.updateEnergyUI -= UpdateEnergyUI;
-        currentToDisplay.updateHealthUI -= UpdateHealthUI;
+        //currentToDisplay.updateHealthUI -= UpdateHealthUI;
         currentToDisplay = null;
         gameObject.SetActive(false);
     }
 
     protected void UpdateEnergyUI(float value) => energyText.text = value.ToString();
 
-    protected void UpdateHealthUI(float value) => healthText.text = value.ToString();
+    //protected void UpdateHealthUI(float value) => healthText.text = value.ToString();
 }

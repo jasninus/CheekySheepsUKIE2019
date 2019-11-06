@@ -17,6 +17,8 @@ public class FireDamageSystem : JobComponentSystem
             {
                 health.health = math.max(health.health - healthLossPerTick, 0);
 
+                //onFire();
+
                 if (health.health <= 0)
                 {
                     death.isDead = true;
@@ -35,4 +37,10 @@ public class FireDamageSystem : JobComponentSystem
 
         return job.Schedule(this, inputDeps);
     }
+
+/*    void onFire()
+    {
+        GameObject  = Instantiate(FireDamageJob, position, Quaternion.identity);
+        firework.GetComponent<ParticleSystem>().Play();
+    }*/
 }

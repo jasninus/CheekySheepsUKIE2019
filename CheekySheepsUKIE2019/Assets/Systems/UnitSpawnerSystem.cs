@@ -45,6 +45,7 @@ public class UnitSpawnerSystem : JobComponentSystem
                 {
                     var instance = CommandBuffer.Instantiate(spawner.Prefab);
 
+
                     var position = math.transform(location.Value, new float3(x, 0, y) * spawnDistance + new float3(rand.NextFloat(), 0, rand.NextFloat()) * randomMaxRadius);
 
                     CommandBuffer.SetComponent(instance, new Translation { Value = position });

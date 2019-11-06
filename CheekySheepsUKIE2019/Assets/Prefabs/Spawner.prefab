@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 188006, guid: c6b7fb383a3534b039692b5485b6e739, type: 3}
+  Particle: {fileID: 0}
   CountX: 20
   CountY: 20
 --- !u!114 &1072218660205962627

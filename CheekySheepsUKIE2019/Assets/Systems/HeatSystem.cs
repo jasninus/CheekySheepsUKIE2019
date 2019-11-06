@@ -85,12 +85,4 @@ public class HeatSystem : JobComponentSystem
 
         return job.Schedule(heatGroup, inputDependencies);
     }
-
-    private static bool CheckCollision(float3 posA, float3 posB, float radiusSqr)
-    {
-        float3 delta = posA - posB;
-        float distanceSquare = delta.x * delta.x + delta.z * delta.z;
-
-        return distanceSquare <= radiusSqr;
-    }
 }

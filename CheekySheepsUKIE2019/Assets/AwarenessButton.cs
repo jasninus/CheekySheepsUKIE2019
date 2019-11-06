@@ -32,7 +32,7 @@ public class AwarenessButton : MonoBehaviour
 
     IEnumerator WhateverYouWant ()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(15);
         awarenessButton.interactable = true;
     }
 

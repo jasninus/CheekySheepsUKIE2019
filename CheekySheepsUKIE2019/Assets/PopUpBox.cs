@@ -14,6 +14,7 @@ public class PopUpBox : MonoBehaviour
 
     //public static bool PopUpState = false;
     public GameObject PopUpBoxes;
+    public Image ImagetoSet;
     public Sprite Armadillo;
     public Sprite Cat;
     public Sprite Anteater;
@@ -24,31 +25,10 @@ public class PopUpBox : MonoBehaviour
         //for testing only as I don't know the requirements
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            PicPicker();
             PopUpActivation();
         }
     }
-
-    /*void PopUpActivate ()
-    {
-        PopUpBoxes.SetActive(true);
-        PopUpState = true;
-    }
-
-    void PopUpDeactivate()
-    { 
-        float secondsLeft = 0;
-
-        void Start() { StartCoroutine(DelayLoadLevel(5)); }
-        Start();
-        IEnumerator DelayLoadLevel(float seconds)
-        {
-            secondsLeft = seconds;
-            do { yield return new WaitForSeconds(1); }
-            while (--secondsLeft > 0);
-            PopUpBoxes.SetActive(false);
-            PopUpState = false;
-        }
-    }*/
 
     void PopUpActivation()
     {
@@ -66,72 +46,28 @@ public class PopUpBox : MonoBehaviour
         }
     }
 
-    /*void Start() { StartCoroutine(DelayLoadLevel(5)); }
-
-    IEnumerator DelayLoadLevel(float seconds)
-    {
-        secondsLeft = seconds;
-        do { yield return new WaitForSeconds(1); }
-        while (--secondsLeft > 0);
-        
-    }*/
-
-    //Image AwarnessFrame;
-
-    /*void Framer()
-    {
-        AwarnessFrame = GetComponent<Image>();
-    }*/
-
-    //int AniSwitch = 1;
-
-    /*void AniSwitcher ()
-    {
-
-        /*PopVals variable;
-        variable = PopVals.AniPicOne;
-        switch (AniSwitch)
-        {
-            case 1:
-                AniPicOne = I;
-                //choose dolpine
-                break;
-            case 2:
-                AniPicTwo = GetComponent//<Image>();
-                //choose monkey
-                break;
-            case 3:
-                AniPicThree = GetComponent//<Image>();
-                //choose macaw
-                break;
-            case 4:
-                AniPicFour = GetComponent//<Image>();
-                //choose cat
-                break;
-        }
-    }*/
-
     //changing dependant on what triggers each animal
      int AniNum = 0;
 
     void PicPicker ()
     {
+        int AniNum = 0;
         switch (AniNum)
         {
             case 0:
-                this.gameObject.GetComponent<Image>().sprite = Armadillo;
+                ImagetoSet.sprite = Armadillo;
                 break;
             case 1:
-                this.gameObject.GetComponent<Image>().sprite = Cat;
+                ImagetoSet.sprite = Cat;
                 break;
             case 2:
-                this.gameObject.GetComponent<Image>().sprite = Anteater;
+                ImagetoSet.sprite = Anteater;
                 break;
             case 3:
-                this.gameObject.GetComponent<Image>().sprite = Macaw;
+                ImagetoSet.sprite = Macaw;
                 break;
             default:
-                this.gameObject.GetComponent<Image>().sprite = Armadillo;
+                ImagetoSet.sprite = Armadillo;
                 break;
         }
     }

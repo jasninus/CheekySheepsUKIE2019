@@ -35,6 +35,12 @@ public class HeatSystem : JobComponentSystem
                 double sqrDis = math.pow(activeFireExtinguisherPositions[i].x - translation.Value.x, 2) +
                                 math.pow(activeFireExtinguisherPositions[i].z - translation.Value.z, 2);
 
+                //math.distancesq(activeFireExtinguisherPositions[i], translation.Value);
+
+                //math.distancesq(
+                //    new float2(activeFireExtinguisherPositions[i].x, activeFireExtinguisherPositions[i].z),
+                //    new float2(translation.Value.x, translation.Value.z));
+
                 if (sqrDis < sqrFireExtinguishingCutoffRadius)
                 {
                     beingExtinguished = true;

@@ -49,6 +49,8 @@ public class UnitSpawnerSystem : JobComponentSystem
 
                     CommandBuffer.SetComponent(instance, new Translation { Value = position });
                     CommandBuffer.AddComponent(instance, new Temperature { temperature = x == 2 && y == 2 ? 1 : 0 });
+                    CommandBuffer.AddComponent(instance, new Health { health = 100 });
+                    CommandBuffer.AddComponent(instance, new Death { isDead = false });
                 }
             }
 

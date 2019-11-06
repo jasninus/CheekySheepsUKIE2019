@@ -27,4 +27,11 @@ public class AnimalSaverVolunteerInfoUI : VolunteerInfoUI
     {
         currentAnimalSaverVolunteer?.ToggleSaving();
     }
+
+    public override void Deactivate()
+    {
+        currentAnimalSaverVolunteer.updateSavingUI -= UpdateAnimalSavingUI;
+        currentAnimalSaverVolunteer = null;
+        base.Deactivate();
+    }
 }

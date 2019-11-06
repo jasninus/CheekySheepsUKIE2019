@@ -7,11 +7,21 @@ public class WaterGathererVolunteerInfoUI : VolunteerInfoUI
 {
     [SerializeField] private Text waterText;
 
+    private WaterGathererVolunteer currentWaterGathererVolunteer;
+
     public override void Activate(VolunteerType toDisplay)
     {
         base.Activate(toDisplay);
-        ((WaterGathererVolunteer)toDisplay).updateWaterUI += UpdateWaterUI;
+        currentWaterGathererVolunteer = ((WaterGathererVolunteer)toDisplay);
+        currentWaterGathererVolunteer.updateWaterUI += UpdateWaterUI;
     }
 
     private void UpdateWaterUI(float value) => waterText.text = value.ToString();
+
+    public override void Deactivate()
+    {
+        currentWaterGathererVolunteer.updateWaterUI -= UpdateWaterUI;
+        currentWaterGathererVolunteer = null;
+        base.Deactivate();
+    }
 }

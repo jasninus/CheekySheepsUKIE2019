@@ -13,16 +13,16 @@ public class FxEngine : MonoBehaviour
         if (fire_level <= 0)
         {
             // remove any fire fx on block
-            if (block.transform.Find("Fire(Clone)") != null)
+            if (block.transform.Find("Fire") != null)
             {
-                Destroy(block.transform.Find("Fire(Clone)").gameObject);
+                Destroy(block.transform.Find("Fire").gameObject);
             }
         }
         else if (fire_level >= 1)
         {
             // remove any fire fx on block
             // add level 1 fire fx to block
-            if (block.transform.Find("Fire(Clone)") == null)
+            if (block.transform.Find("Fire") == null)
             {
                 GameObject new_fire = Instantiate(fireFX, block.transform.position, Quaternion.identity);
                 new_fire.transform.parent = block.transform;
